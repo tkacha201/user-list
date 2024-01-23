@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const CreateUserModal = ({ onHide }) => {
+const CreateUserModal = ({ onHide, onUserCreate }) => {
   useEffect(() => {
     const hadnleEscKey = (event) => {
       if (event.keyCode === 27) {
@@ -40,7 +40,7 @@ const CreateUserModal = ({ onHide }) => {
               </svg>
             </button>
           </header>
-          <form>
+          <form onSubmit={onUserCreate}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName">First name</label>

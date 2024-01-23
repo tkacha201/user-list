@@ -7,7 +7,6 @@ import CreateUserModal from "./CreateUserModal";
 const UserListTable = () => {
   const [users, setUsers] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
-  console.log(users);
 
   useEffect(() => {
     userService
@@ -28,9 +27,26 @@ const UserListTable = () => {
     setShowCreate(false);
   };
 
+  const userCreateHandler = async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+
+    const newUser = await userService.create(data);
+
+    setUsers((state) => [...users, newUser]);
+
+    setShowCreate(false);
+  };
+
   return (
     <div className="table-wrapper">
-      {showCreate && <CreateUserModal onHide={hideCreateUserModal} />}
+      {showCreate && (
+        <CreateUserModal
+          onUserCreate={userCreateHandler}
+          onHide={hideCreateUserModal}
+        />
+      )}
       <table className="table">
         <thead>
           <tr>

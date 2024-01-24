@@ -7,6 +7,7 @@ import CreateUserModal from "./CreateUserModal";
 const UserListTable = () => {
   const [users, setUsers] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
     userService
@@ -39,6 +40,10 @@ const UserListTable = () => {
     setShowCreate(false);
   };
 
+  const userInfoClickHandler = (userId) => {
+    console.log(userId);
+  };
+
   return (
     <div className="table-wrapper">
       {showCreate && (
@@ -47,6 +52,9 @@ const UserListTable = () => {
           onHide={hideCreateUserModal}
         />
       )}
+
+      {showInfo && <UserInfoModal onClose={() => setShowInfo(false)} />}
+
       <table className="table">
         <thead>
           <tr>
@@ -146,7 +154,12 @@ const UserListTable = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <UserListItem key={user._id} {...user} />
+            <UserListItem
+              key={user._id}
+              _id={user._id}
+              {...user}
+              onInfoClick={userInfoClickHandler}
+            />
           ))}
         </tbody>
       </table>

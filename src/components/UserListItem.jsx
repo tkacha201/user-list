@@ -2,13 +2,18 @@ import React from "react";
 import { formatDate } from "../utils/dateUtils";
 
 const UserListItem = ({
+  _id,
   firstName,
   lastName,
   email,
   phoneNumber,
   createdAt,
   imageUrl,
+  onInfoClick,
 }) => {
+  const infoClickHandler = () => {
+    onInfoClick(_id);
+  };
   return (
     <tr>
       <td>
@@ -55,7 +60,11 @@ const UserListItem = ({
             ></path>
           </svg>
         </button>
-        <button className="btn info-btn" title="Info">
+        <button
+          className="btn info-btn"
+          title="Info"
+          onClick={infoClickHandler}
+        >
           <svg
             aria-hidden="true"
             focusable="false"

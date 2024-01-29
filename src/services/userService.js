@@ -8,6 +8,12 @@ export const getAll = async () => {
   return data;
 };
 
+export const getOne = async (id) => {
+  const response = await fetch(`${baseUrl}/${id}`);
+  const result = await response.json();
+  return result;
+};
+
 export const create = async (data) => {
   const body = {
     firstName: data.firstName,
